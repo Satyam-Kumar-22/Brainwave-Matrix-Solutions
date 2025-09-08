@@ -2,23 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Main public class that contains the application
 public class ATM_Application {
 
     public static void main(String[] args) {
-        // Create a sample bank account for a user.
-        // User ID: "user123", PIN: "1234", Initial Balance: $1000.0
         BankAccount account = new BankAccount(1000.0);
         
-        // Create an ATM instance linked to the user's account.
         ATM atm = new ATM(account, "user123", "1234");
         
-        // Start the ATM.
         atm.start();
     }
 }
 
-// Represents the user's bank account
 class BankAccount {
     private double balance;
     private List<String> transactionHistory;
@@ -29,7 +23,6 @@ class BankAccount {
         transactionHistory.add("Initial deposit: $" + initialBalance);
     }
 
-    // **NEW METHOD ADDED HERE**
     public void addTransactionNote(String note) {
         this.transactionHistory.add(note);
     }
@@ -72,7 +65,6 @@ class BankAccount {
     }
 }
 
-// Represents the ATM machine and its logic
 class ATM {
     private BankAccount userAccount;
     private String userId;
@@ -119,7 +111,7 @@ class ATM {
 
             try {
                 choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline left-over
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
@@ -145,8 +137,8 @@ class ATM {
                 }
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear the invalid input
-                choice = 0; // Reset choice to continue loop
+                scanner.nextLine();
+                choice = 0;
             }
         } while (choice != 6);
     }
@@ -165,7 +157,6 @@ class ATM {
                 if (newPin.length() >= 4 && newPin.matches("\\d+")) {
                     this.userPin = newPin;
                     System.out.println("PIN changed successfully!");
-                    // **CODE CORRECTED HERE**
                     userAccount.addTransactionNote("User changed their PIN.");
                 } else {
                     System.out.println("Invalid PIN format. PIN must be at least 4 digits.");
