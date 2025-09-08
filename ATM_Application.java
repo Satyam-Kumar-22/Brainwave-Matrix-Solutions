@@ -12,7 +12,6 @@ public class ATM_Application {
         atm.start();
     }
 }
-
 class BankAccount {
     private double balance;
     private List<String> transactionHistory;
@@ -22,15 +21,12 @@ class BankAccount {
         this.transactionHistory = new ArrayList<>();
         transactionHistory.add("Initial deposit: $" + initialBalance);
     }
-
     public void addTransactionNote(String note) {
         this.transactionHistory.add(note);
     }
-
     public double getBalance() {
         return balance;
     }
-
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
@@ -40,7 +36,6 @@ class BankAccount {
             System.out.println("Deposit amount must be positive.");
         }
     }
-
     public boolean withdraw(double amount) {
         if (amount <= 0) {
             System.out.println("Withdrawal amount must be positive.");
@@ -55,7 +50,6 @@ class BankAccount {
         System.out.println("Successfully withdrew $" + amount);
         return true;
     }
-
     public void printTransactionHistory() {
         System.out.println("\n--- Transaction History ---");
         for (String transaction : transactionHistory) {
@@ -64,7 +58,6 @@ class BankAccount {
         System.out.println("-------------------------");
     }
 }
-
 class ATM {
     private BankAccount userAccount;
     private String userId;
@@ -77,7 +70,6 @@ class ATM {
         this.userPin = userPin;
         this.scanner = new Scanner(System.in);
     }
-
     public void start() {
         System.out.println("Welcome to the ATM!");
         if (authenticateUser()) {
@@ -87,7 +79,6 @@ class ATM {
         }
         scanner.close();
     }
-
     private boolean authenticateUser() {
         System.out.print("Enter User ID: ");
         String enteredId = scanner.nextLine();
@@ -96,7 +87,6 @@ class ATM {
 
         return userId.equals(enteredId) && userPin.equals(enteredPin);
     }
-
     private void showMenu() {
         int choice;
         do {
@@ -142,7 +132,6 @@ class ATM {
             }
         } while (choice != 6);
     }
-    
     private void changePin() {
         System.out.print("Enter your current PIN for verification: ");
         String currentPin = scanner.nextLine();
@@ -168,12 +157,9 @@ class ATM {
             System.out.println("Incorrect current PIN. Action cancelled.");
         }
     }
-
-
     private void checkBalance() {
         System.out.printf("Your current balance is: $%.2f\n", userAccount.getBalance());
     }
-
     private void deposit() {
         System.out.print("Enter amount to deposit: ");
         try {
@@ -185,7 +171,6 @@ class ATM {
             scanner.nextLine();
         }
     }
-
     private void withdraw() {
         System.out.print("Enter amount to withdraw: ");
         try {
@@ -197,7 +182,6 @@ class ATM {
             scanner.nextLine();
         }
     }
-
     private void viewTransactionHistory() {
         userAccount.printTransactionHistory();
     }
